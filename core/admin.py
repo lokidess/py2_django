@@ -1,15 +1,6 @@
 from django.contrib import admin
-from core.models import Todo
 
+from core.models import Post, Tag
 
-class TodoAdmin(admin.ModelAdmin):
-    list_display = ('priority', 'text')
-    search_fields = ('text', 'id')
-    list_filter = ('priority',)
-    readonly_fields = ('priority', 'text')
-
-    # def has_delete_permission(self, request, obj=None):
-    #     return False
-
-
-admin.site.register(Todo, TodoAdmin)
+admin.site.register(Post)
+admin.site.register(Tag)

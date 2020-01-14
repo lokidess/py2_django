@@ -1,0 +1,27 @@
+version: "3"
+
+
+services:
+
+  web:
+    restart: always
+    container_name: my_awesome_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - 777:8000
+    volumes:
+      - ./:/app
+    depends_on:
+      - database
+
+  database:
+    restart: always
+    image: postgres:10
+    container_name: notes_db
+    environment:
+      POSTGRES_PASSWORD: "test"
+      POSTGRES_USER: "loki"
+      POSTGRES_DB: "notes"
