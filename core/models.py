@@ -16,7 +16,16 @@ class TimedAbstractModel(models.Model):
 def image_upload_to(instance, filename):
     cur_date = now()
     # return f"{cur_date.year}/{cur_date.month}/{cur_date.day}"
-    return f"post_images/{instance.author.id}/{filename}"
+    return f"images"
+
+
+class PostManager(models.Manager):
+
+    def get_published(self):
+        return self.get_queryset().filter(is_published=True)
+
+    def get_published_with_users(self):
+        return self.get_published().select_related('author')
 
 
 class Post(TimedAbstractModel):
@@ -36,9 +45,11 @@ class Post(TimedAbstractModel):
     tags = models.ManyToManyField('Tag', blank=True)
     # greeting = models.CharField(max_length=255, blank=True, null=True)
     is_published = models.BooleanField(default=False)
-    image = models.ImageField(upload_to=image_upload_to)
+    image = models.ImageField(upload_to=image_upload_to, blank=True, null=True)
     pegi = models.PositiveSmallIntegerField(choices=PEGI_CHOICES)
     # file = models.FileField(upload_to='tmp_files')
+
+    objects = PostManager()
 
     def __str__(self):
         return self.title
@@ -65,5 +76,5 @@ def pre_update_handler(*args, **kwargs):
     kwargs['instance'].title = 'EVAL ARE EVIL!!!!'
 
 
-pre_save.connect(pre_update_handler, sender=Post)
+# pre_save.connect(pre_update_handler, sender=Post)
 

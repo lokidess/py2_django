@@ -2,33 +2,12 @@
 {% load bootstrap4 %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-md-6">
-            <ul class="list-group">
-                {% for todo in todos %}
-                    <li class="list-group-item">
-                        <div class="row">
-                            <div class="col-md-10">
-                                <span>({{ todo.get_priority_display }}) {{ todo.text }}</span>
-                            </div>
-                            <div class="col-md-2">
-                                <a href="/delete-todo/{{ todo.id }}" type="submit" class="btn btn-success">Done</a>
-                            </div>
-                        </div>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="col-md-6">
-            {% if error %}
-                <h1>Hey! You stupid bastard!</h1>
-            {% endif %}
-            <form class="form" method="post">{% csrf_token %}
-                {% bootstrap_form form %}
-                {% buttons %}
-                    <button type="submit" class="btn btn-primary mb-2">Add todo</button>
-                {% endbuttons %}
-            </form>
-        </div>
-    </div>
+    HELLO WORLD<br>
+    {% for post in posts %}
+        {{post.title}} - {{ post.author.username}}<br>
+        {% for tag in post.tags.all %}
+            #{{ tag.name }}
+        {% endfor %}
+        <br>
+    {% endfor %}
 {% endblock content %}
