@@ -51,6 +51,9 @@ class Post(TimedAbstractModel):
 
     objects = PostManager()
 
+    class Meta:
+        ordering = ('-id', )
+
     def __str__(self):
         return self.title
 

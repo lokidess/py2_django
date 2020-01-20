@@ -1,6 +1,8 @@
 from django.views.generic import TemplateView, FormView, CreateView, ListView, DeleteView
 from django.contrib.auth.models import User
+from django.db.models.query_utils import Q
 from core.models import Post, Tag
+from django.db.models import Count, F, Value, Sum
 
 
 class IndexView(TemplateView):
@@ -34,9 +36,9 @@ class IndexView(TemplateView):
         # post.text = 'hola'
         # post.save()
 
-        Post.objects.filter(title__icontains='qwe').delete()
-
-        Post.objects.get(id=1).delete()
+        # Post.objects.filter(title__icontains='qwe').delete()
+        #
+        # Post.objects.get(id=1).delete()
 
         # tags = ['сказочноебали', 'test', 'loki']
         # tags_obj = []
@@ -62,4 +64,48 @@ class IndexView(TemplateView):
 
         # print(context['posts'])
         # context['posts'] = Post.objects.get_published_with_users()
+
+        # context['posts'] = Post.objects.all()\
+        #     .prefetch_related('tags')\
+        #     .select_related('author')\
+        #     .order_by('-created_at')[:2]
+        # context['posts'] = Post.objects.filter(
+        #     title='qwe', pegi=Post.PEGI_TEEN
+        # )
+        # | - OR
+        # & - AND
+        # ~ - NOT
+
+        # my_query_logic = Q()
+        # my_query_logic.add(Q(title='qwe'), Q.AND)
+        # my_query_logic.add(Q(pegi=Post.PEGI_TEEN), Q.OR)
+
+        # context['posts'] = Post.objects.filter(
+        #     # Q(title='qwe') & Q(pegi=Post.PEGI_TEEN)
+        #     # ~Q(pegi=Post.PEGI_ADULT)
+        #     # my_query_logic
+        #     # title=F('text')
+        #     # text__startswith=F('title')
+        # )
+        # from django.db import models
+        # context['posts'] = Post.objects.all().annotate(
+        #     tags_count=Count('tags', output_field=models.CharField())
+        # ).filter(tags_count__gte=2).order_by('-tags_count').prefetch_related('tags')\
+        #     .select_related('author')
+        context['posts'] = Post.objects.all().values(
+            'title', 'author__username'
+        )
+        #
+        # context['posts_count'] = Post.objects.all().annotate(
+        #     tags_count=Count('tags')
+        # ).aggregate(Sum('tags_count'))
+
+        # context['post'] = Post.objects.filter().first()
+        # context['post'] = Post.objects.filter().last()
+
+
+
+        # context['posts_count'] = sum(context['posts_count'])
+        # context['my_query_logic'] = my_query_logic
+
         return context
