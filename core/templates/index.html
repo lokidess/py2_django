@@ -1,20 +1,68 @@
-<!--{% extends 'base.html' %}-->
-<!--{% load bootstrap4 %}-->
+<html>
+    <head>
+        <title>MY SUPER HTML</title>
+        <style>
+            #some-id {
+                width: 100px;
+                height: 100px;
+                background-color: pink;
+                border-radius: 50px;
+            }
+            .red {
+                color: red;
+            }
+            div {
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="some-id" class="red">
+            asdasdasd
+        </div>
+        <ul>
+            <li>asdasd</li>
+            <li>asdasd</li>
+            <li>asdasd</li>
+        </ul>
+        <form method="post" action=".">
+        <!--<input type="date">-->
+        <!--<input type="time">-->
+        <!--<input type="file">-->
+        <!--<input type="number">-->
+        <!--<input type="password">-->
+            <!--<input type="email" required>-->
+            <!--<input type="checkbox">-->
+            <!--<input type="radio" name="my">-->
+            <!--<input type="radio" name="my">-->
+            <!--<input type="radio" name="my">-->
+            <!--<input type="color">-->
 
-<!--{% block content %}-->
-    <!--HELLO WORLD<br>-->
-    <!--&lt;!&ndash;{{posts_count.tags_count__sum}}<br>&ndash;&gt;-->
-    <!--<br>-->
-    <!--<br>-->
-    <!--&lt;!&ndash;{{ post }}&ndash;&gt;-->
-    <!--{{ posts }}-->
-    <!--<br>-->
-    <!--<br>-->
-    <!--{% for post in posts %}-->
-        <!--{{post.title}} - {{ post.author__username}} - {{post.tags_count}}<br>-->
-        <!--{% for tag in post.tags.all %}-->
-            <!--#{{ tag.name }}-->
-        <!--{% endfor %}-->
-        <!--<br>-->
-    <!--{% endfor %}-->
-<!--{% endblock content %}-->
+            <input type="submit" value="Поехали!">
+            <!--<button type="submit">asdasdasdasd</button>-->
+        </form>
+        <!--<textarea cols="10" rows="10">-->
+
+        <!--</textarea>-->
+        <table border="1px" width="100%">
+            <tr>
+                <td class="red">qweqwe</td>
+                <td class="red">qweqwe</td>
+                <td class="red">qweqwe</td>
+                <td class="red">qweqwe</td>
+            </tr>
+            <tr>
+                <td class="red">qweqwe</td>
+                <td>qweqwe</td>
+                <td class="red">qweqwe</td>
+                <td class="red">qweqwe</td>
+            </tr>
+            <tr>
+                <td>qweqwe</td>
+                <td>qweqwe</td>
+                <td>qweqwe</td>
+                <td>qweqwe</td>
+            </tr>
+        </table>
+    </body>
+</html>
