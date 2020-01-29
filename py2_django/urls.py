@@ -17,18 +17,20 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 
-from core.views import IndexView
+from core.views import IndexView, PostCreateView, PostUpdateView, PostDeleteView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', IndexView.as_view())
+    path('', IndexView.as_view()),
+    path('post_create/', PostCreateView.as_view()),
+    path('post_edit/<int:pk>/', PostUpdateView.as_view()),
+    path('post_delete/<int:pk>/', PostDeleteView.as_view())
 ]
 
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns = [
         path('__debug__/', include(debug_toolbar.urls)),
-
         # For django versions before 2.0:
         # url(r'^__debug__/', include(debug_toolbar.urls)),
 
