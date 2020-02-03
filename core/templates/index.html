@@ -1,68 +1,65 @@
-<html>
-    <head>
-        <title>MY SUPER HTML</title>
-        <style>
-            #some-id {
-                width: 100px;
-                height: 100px;
-                background-color: pink;
-                border-radius: 50px;
-            }
-            .red {
-                color: red;
-            }
-            div {
-                color: white;
-            }
-        </style>
-    </head>
-    <body>
-        <div id="some-id" class="red">
-            asdasdasd
-        </div>
-        <ul>
-            <li>asdasd</li>
-            <li>asdasd</li>
-            <li>asdasd</li>
-        </ul>
-        <form method="post" action=".">
-        <!--<input type="date">-->
-        <!--<input type="time">-->
-        <!--<input type="file">-->
-        <!--<input type="number">-->
-        <!--<input type="password">-->
-            <!--<input type="email" required>-->
-            <!--<input type="checkbox">-->
-            <!--<input type="radio" name="my">-->
-            <!--<input type="radio" name="my">-->
-            <!--<input type="radio" name="my">-->
-            <!--<input type="color">-->
+{% load core_tags %}
+{% block extra_head %}
+{% endblock %}
 
-            <input type="submit" value="Поехали!">
-            <!--<button type="submit">asdasdasdasd</button>-->
-        </form>
-        <!--<textarea cols="10" rows="10">-->
+<h1>
 
-        <!--</textarea>-->
-        <table border="1px" width="100%">
-            <tr>
-                <td class="red">qweqwe</td>
-                <td class="red">qweqwe</td>
-                <td class="red">qweqwe</td>
-                <td class="red">qweqwe</td>
-            </tr>
-            <tr>
-                <td class="red">qweqwe</td>
-                <td>qweqwe</td>
-                <td class="red">qweqwe</td>
-                <td class="red">qweqwe</td>
-            </tr>
-            <tr>
-                <td>qweqwe</td>
-                <td>qweqwe</td>
-                <td>qweqwe</td>
-                <td>qweqwe</td>
-            </tr>
-        </table>
-    </body>
-</html>
+    <p>
+        {% queryset_filter post_model id=22 title__icontains="a" %}
+    </p>
+
+    {{ tags|join:',' }}
+    {% include_some %}
+    <p>
+        {% formula 1 2 3 %}
+    </p>
+
+    {{ posts.not_existing.method }}<br>
+
+    {{ lst.0|alarm }}<br>
+
+    {{ dct.name }} - {{ dct.age }} <br>
+
+    {{ dct.keys }} <br>
+    {% with a=11 %}
+        {% if a > 10 %}
+            <p>{{a}}</p>
+        {% endif %}
+    {% endwith %}
+
+    <!--{% with post_list=posts|make_list|join:"<br>"|upper %}-->
+        <!--{{ post_list }}-->
+    <!--{% endwith %}-->
+    {{ request }}
+    <p>
+        {#{% if posts|length %}#}
+        {{ 10|multi:2 }}
+        {{ posts|join:",<br>" }}
+        {{ posts|default:"No posts!" }}
+    </p>
+
+    {% for post in posts %}
+
+        {% include "test_tpl.html" with a=10 b=20 %}
+
+        {{ forloop.counter }}. {{ post }}{% if not forloop.last %},{% endif %}<br>
+        {% if forloop.counter > 10 %}
+            !!!!
+        {% elif forloop.counter < 5 %}
+            ΩΩΩΩ
+        {% else %}
+            ????
+        {% endif %}
+    {% empty %}
+        No posts!!!
+    {% endfor %}
+    <p>
+    It is {% now "jS F Y H:i" %}
+    </p>
+
+    {% verbatim %}
+        {{ posts }}
+    {% endverbatim %}
+
+
+</h1>

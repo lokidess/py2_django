@@ -1,0 +1,3 @@
+server:
+  ip: {{ip}}
+  port: {{port}}

@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+    {{tags|join:'<br>'}}
     <h1>Post create!</h1>
     {{message}}
     {% if messages %}
