@@ -107,10 +107,10 @@ class IndexView(TemplateView):
         context['tags'] = "BOLT"
         context['post_model'] = Post.objects
 
-        tpl = get_template('yamls/conf.yml')
-        new = tpl.render({'ip': "127.0.0.1", 'port': 937})
-
-        with open('media/yamls/config.yml', 'w') as conf:
-            conf.write(new)
+        # tpl = get_template('yamls/conf.yml')
+        # new = tpl.render({'ip': "127.0.0.1", 'port': 937})
+        #
+        # with open('media/yamls/config.yml', 'w') as conf:
+        #     conf.write(new)
 
         return context
