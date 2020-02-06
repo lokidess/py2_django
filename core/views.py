@@ -114,3 +114,14 @@ class IndexView(TemplateView):
         #     conf.write(new)
 
         return context
+
+
+class MyAjaxView(TemplateView):
+    template_name = 'test_tpl.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(MyAjaxView, self).get_context_data(**kwargs)
+        context['post'] = {'id': "OLOLO"}
+        context['a'] = 123123
+        context['b'] = 123123213
+        return context

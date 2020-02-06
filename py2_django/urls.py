@@ -16,16 +16,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
-
-from core.views import IndexView, PostCreateView, PostUpdateView, PostDeleteView
+from django.conf.urls.static import static
+from core.views import IndexView, PostCreateView, PostUpdateView, PostDeleteView, MyAjaxView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', IndexView.as_view()),
     path('post_create/', PostCreateView.as_view()),
     path('post_edit/<int:pk>/', PostUpdateView.as_view()),
-    path('post_delete/<int:pk>/', PostDeleteView.as_view())
-]
+    path('post_delete/<int:pk>/', PostDeleteView.as_view()),
+    path('ajax/data/', MyAjaxView.as_view())
+] + static(
+    settings.STATIC_URL, document_root=settings.STATIC_ROOT
+)
 
 if settings.DEBUG:
     import debug_toolbar

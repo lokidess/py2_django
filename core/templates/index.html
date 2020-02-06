@@ -1,13 +1,82 @@
-{% load core_tags %}
+{% load core_tags static %}
 {% block extra_head %}
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+<script src="{% static 'js/index.js' %}?{% now 'U' %}"></script>
 <script>
-    alert('Hello world!');
+
+    // function some(a, b) {
+    //     if (b === undefined) {
+    //         b = 0
+    //     } else if (a < b) {
+    //         b = b
+    //     } else {
+    //         console.log('qwe');
+    //     }
+    //
+    //     switch (a + b) {
+    //         case 1:
+    //             console.log(123);
+    //             break;
+    //         case 2:
+    //             console.log(342);
+    //             break;
+    //         default:
+    //             console.log('Nothing');
+    //     }
+    //
+    //     return a + b;
+    // }
+    //
+    // let say_hi = function () {
+    //     alert('HI');
+    // };
+    //
+    // // say_hi();
+    // console.log(some(2,2));
+    //
+    // let my_dict = {
+    //     name: "Loki",
+    //     age: 30,
+    //     tell_me_about: function () {
+    //         let that = this;
+    //         function some () {
+    //             console.log(that.name);
+    //         }
+    //
+    //         some();
+    //         console.log(this);
+    //         console.log("Hi! My name is " + this.name + ". My age is " + this.age)
+    //     }
+    // };
+    // let some_lst = [1,2,4,5,2];
+    //
+    // for (let i=0; i<some_lst.length; i=i+1) {
+    //     console.log(some_lst[i]);
+    // }
+
+    // console.log(my_dict);
+    // my_dict.tell_me_about()
 </script>
 {% endblock %}
 
 <h1>
-
-    <p>
+    <div id="my_test_div" style="border: solid red 1px">
+        <p class="some">
+            1
+        </p>
+        <p class="some">
+            2
+        </p>
+        <p class="some">
+            3
+        </p>
+    </div>
+    <button id="load">Load some data!</button>
+    <p class="some">
         {% queryset_filter post_model id=22 title__icontains="a" %}
     </p>
 
@@ -59,10 +128,35 @@
     <p>
     It is {% now "jS F Y H:i" %}
     </p>
-
     {% verbatim %}
         {{ posts }}
     {% endverbatim %}
 
 
 </h1>
+<script>
+    // let my_div = document.getElementById('my_test_div');
+    // my_div.innerText = 'test';
+    // my_div.innerHTML += "<input type='text'>";
+    // let my_div = $('#my_test_div');
+    // $('#my_test_div').click(function (e) {
+        // alert('You shell not pass!');
+    // });
+    // $('.some').click(function (e) {
+        // setTimeout(function () {
+        //     $('#my_test_div').remove();
+        // }, 1000);
+        // setInterval(function () {
+        //     $('#my_test_div').width($('#my_test_div').width() - 1);
+        // }, 1);
+        // window.location = 'http://google.com'
+    // });
+    // $('#my_test_div').hover(function () {
+    //     $(this).css({'background-color': 'red'});
+    // }, function () {
+    //     $(this).css({'background-color': 'white'});
+    // });
+    // my_div.html('asdasd');
+    // console.log(my_div.html());
+    // console.log(my_div.attr('id', 'qwe'));
+</script>
