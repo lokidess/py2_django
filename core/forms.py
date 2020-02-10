@@ -34,6 +34,8 @@ from core.models import Tag, Post
 #             post.tags.add(*self.cleaned_data['tags'])
 #
 #         return post
+from core.widgets import HTMLEdit
+
 
 class PostCreate(forms.ModelForm):
 
@@ -41,12 +43,12 @@ class PostCreate(forms.ModelForm):
         model = Post
         # fields = ('title', 'text', 'tags', 'pegi')
         exclude = ('author', 'is_published', 'image')
-        # widgets = {
-        #     'title': forms.widgets.TextInput(attrs={'class': 'form-control'}),
-        #     'text': forms.widgets.Textarea(attrs={'class': 'form-control'}),
-        #     'tags': forms.widgets.SelectMultiple(attrs={'class': 'form-control'}),
-        #     'pegi': forms.widgets.Select(attrs={'class': 'form-control'})
-        # }
+        widgets = {
+            'title': forms.widgets.TextInput(attrs={'class': 'form-control'}),
+            'text': HTMLEdit(),
+            'tags': forms.widgets.SelectMultiple(attrs={'class': 'form-control'}),
+            'pegi': forms.widgets.Select(attrs={'class': 'form-control'})
+        }
 
     def __init__(self, *args, **kwargs):
         super(PostCreate, self).__init__(*args, **kwargs)
@@ -61,3 +63,13 @@ class PostCreate(forms.ModelForm):
 
         self.save_m2m()
         return post
+
+
+class PostAdmin(forms.ModelForm):
+
+    class Meta:
+        model = Post
+        fields = '__all__'
+        widgets = {
+            'text': HTMLEdit(),
+        }

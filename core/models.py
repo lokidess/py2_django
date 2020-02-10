@@ -1,7 +1,11 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
 from django.db.models.signals import pre_save
 from django.utils.timezone import now
+
+
+class MyUser(AbstractUser):
+    phone = models.CharField(max_length=12)
 
 
 class TimedAbstractModel(models.Model):
@@ -41,7 +45,7 @@ class Post(TimedAbstractModel):
 
     title = models.CharField(max_length=255)
     text = models.TextField()
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    # author = models.ForeignKey('MyUser', on_delete=models.CASCADE)
     tags = models.ManyToManyField('Tag', blank=True)
     # greeting = models.CharField(max_length=255, blank=True, null=True)
     is_published = models.BooleanField(default=False)
@@ -73,6 +77,11 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
+
+
+# class Profile(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     phone = models.CharField(max_length=12)
 
 
 def pre_update_handler(*args, **kwargs):

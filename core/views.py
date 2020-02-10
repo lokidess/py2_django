@@ -73,7 +73,8 @@ class PostCreateView(CreateView):
 class PostUpdateView(UpdateView):
     template_name = 'post_create.html'
     model = Post
-    fields = '__all__'
+    form_class = PostCreate
+    # fields = '__all__'
     # form_class = PostCreate
     # success_url = '/post_create/'
     # queryset = Post.objects.all()
@@ -81,8 +82,8 @@ class PostUpdateView(UpdateView):
     def get_success_url(self):
         return f'/post_edit/{self.kwargs["pk"]}/'
 
-    def get_queryset(self):
-        return Post.objects.filter(author=self.request.user)
+    # def get_queryset(self):
+    #     return Post.objects.filter(author=self.request.user)
 
     # def form_valid(self, form):
     #     form.save(user=self.request.user)
